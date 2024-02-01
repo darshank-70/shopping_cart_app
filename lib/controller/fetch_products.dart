@@ -30,6 +30,7 @@ List<Product> createProductObject(productMapInList, productObjects) {
       productName: item['title'],
       productDescription: item['description'],
       productThumbnail: item['thumbnail'],
+      productPrice: item['price'].toDouble(),
     );
     productObjects.add(temp);
   }

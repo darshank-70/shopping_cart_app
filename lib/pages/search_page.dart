@@ -11,29 +11,36 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  bool isDataFetched = false;
   List<Product> productList = [
     Product(
-        productID: 999,
-        productName: 'Loading..',
-        productDescription: 'Loading....',
-        productThumbnail: 'https://i.ibb.co/jJNKtyS/loading.jpg')
+      productID: 999,
+      productName: 'Loading..',
+      productDescription: 'Loading....',
+      productThumbnail: 'https://i.ibb.co/jJNKtyS/loading.jpg',
+      productPrice: 9.999,
+    )
   ];
   @override
   void initState() {
     super.initState();
-    getProducts();
+    //if the App has already fetched Data from API no need to fetch again.
+    if (!isDataFetched) {
+      getProducts();
+    }
     print('initState: no await but a funtion above uses await');
   }
 
   getProducts() async {
     productList = await fetchProducts();
-    print(productList.runtimeType);
+    isDataFetched = true;
+    // print(productList.runtimeType);
 
-    print('getProducts: await is above');
-    print('=======PID ${productList[1].productID}==========');
-    print('=======PID ${productList[1].productName}==========');
-    print('=======PID ${productList[1].productThumbnail}==========');
-    print('=======PID ${productList[1].productDescription}==========');
+    // print('getProducts: await is above');
+    // print('=======PID ${productList[1].productID}==========');
+    // print('=======PID ${productList[1].productName}==========');
+    // print('=======PID ${productList[1].productThumbnail}==========');
+    // print('=======PID ${productList[1].productDescription}==========');
     setState(() {
       productList;
     });

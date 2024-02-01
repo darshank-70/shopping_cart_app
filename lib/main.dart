@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:shopping_cart/models/product.dart';
 import 'package:shopping_cart/pages/cart_page.dart';
 import 'package:shopping_cart/pages/home_page.dart';
 import 'package:shopping_cart/pages/search_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter('card_db');
+  Hive.registerAdapter(ProductAdapter());
+  await Hive.openBox('cart_db');
+
   runApp(const MyApp());
 }
 
